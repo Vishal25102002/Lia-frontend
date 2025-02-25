@@ -7,7 +7,7 @@ import ChatbotInput from './ChatbotInput';
 import MessageList from './MessageList';
 import ChatbotNav from './ChatbotNav';
 import ChatbotButton from './ChatbotButton';
-import ChatbotLoader from './ChatbotLoader'; // Import the loader component
+import ChatbotLoader from './ChatbotLoader'; 
 import "../../App.css"
 
 export interface Message {
@@ -23,7 +23,6 @@ const Chatbot: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<'home' | 'chat'>('home');
 
-  // Toggle the chatbot open/closed
   const toggleChatbot = (e?: React.MouseEvent<HTMLButtonElement>) => {
     e?.stopPropagation();
     setIsOpen((prev) => !prev);
@@ -37,7 +36,6 @@ const Chatbot: React.FC = () => {
   const handleSendMessage = async (message: string) => {
     setActiveTab('chat');
 
-    // Add user message to state
     const userMessage: Message = { 
       id: Date.now(), 
       text: message, 
@@ -48,14 +46,12 @@ const Chatbot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // IMPORTANT: Must match FastAPI's expected key: "question"
       const response = await axios.post(
         "http://127.0.0.1:5000/ask",
         { question: message },
         { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } }
       );
 
-      // The FastAPI endpoint returns { "answer": "some text" }
       const botText = response.data.answer || "Sorry, I didn't understand that.";
 
       const botMessage: Message = { 
@@ -84,13 +80,10 @@ const Chatbot: React.FC = () => {
   return (
     <>
       {isOpen && (
-        <div
-          className="
-            fixed bottom-16 right-2 sm:right-4 md:right-6 lg:right-8
-            w-[90vw] sm:w-80 md:w-96 lg:w-[400px] xl:w-[450px]
-            bg-white/80 backdrop-blur-xl border border-blue-200 rounded-3xl shadow-2xl
-            flex flex-col h-[70vh] sm:h-[600px] lg:h-[650px] z-50 overflow-hidden
-          "
+        <div className="fixed bottom-16 right-2 sm:right-4 md:right-6 lg:right-8
+          w-[90vw] sm:w-80 md:w-96 lg:w-[400px] xl:w-[450px]
+          bg-white/80 backdrop-blur-xl border border-blue-200 rounded-3xl shadow-2xl
+          flex flex-col h-[70vh] sm:h-[600px] lg:h-[650px] z-50 overflow-hidden"
         >
           <ChatbotHeader onClose={toggleChatbot} onReset={handleResetChat} />
           <div className="flex flex-col flex-1 overflow-hidden">
@@ -109,7 +102,7 @@ const Chatbot: React.FC = () => {
                   ) : (
                     <MessageList messages={messages} />
                   )}
-                  {isLoading && <ChatbotLoader />} {/* Use the loader component here */}
+                  {isLoading && <ChatbotLoader />}
                 </>
               )}
             </div>

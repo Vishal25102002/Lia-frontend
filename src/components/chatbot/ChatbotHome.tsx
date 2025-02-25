@@ -27,13 +27,13 @@ const ChatbotHome: React.FC<ChatbotHomeProps> = ({ onPreloadedMessageClick, setA
           <button
             key={index}
             onClick={() => {
-              console.log(`Button Clicked: ${msg.text}`); // Debugging log
+              console.log(`Button Clicked: ${msg.text}`);
               msg.action();
             }}
-            className="w-full px-4 py-3 border border-blue-300 rounded-lg transition hover:bg-blue-50 hover:shadow-lg focus:outline-none text-left"
+            className="w-full px-4 py-3 bg-gray-100 text-gray-900 border border-gray-300 rounded-lg transition hover:bg-gray-200 hover:shadow-lg focus:outline-none text-left"
           >
             <div className="flex justify-between items-center">
-              <span className="text-gray-800 font-medium">{msg.text}</span>
+              <span className="font-medium">{msg.text}</span>
               <ExternalLink size={20} className="text-blue-500" />
             </div>
           </button>
@@ -42,7 +42,7 @@ const ChatbotHome: React.FC<ChatbotHomeProps> = ({ onPreloadedMessageClick, setA
       <button
         onClick={() => {
           console.log("Navigating to Contact Support...");
-          window.open("https://www.lycamobile.us/en/help/contact-us/?srsltid=AfmBOoq4XdVFkgeXLK1zuvUIGvA3vZCqDIs8X2umdTM4ZT8M9LGwLdpq", "_blank");
+          window.open("https://www.lycamobile.us/en/help/contact-us/", "_blank");
         }}
         className="mt-4 w-full px-4 py-3 bg-blue-600 text-white rounded-lg transition hover:bg-blue-700 hover:shadow-lg focus:outline-none"
       >
